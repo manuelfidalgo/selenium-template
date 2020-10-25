@@ -12,7 +12,7 @@ public class MainPage {
 
 	private ChromeDriver driver;
 
-	private static final String INITIAL_URL = "http://localhost:8080/";
+	private static final String INITIAL_URL = "http://example.com//";
 
 	public MainPage(ChromeDriver thedriver) {
 		driver = thedriver;

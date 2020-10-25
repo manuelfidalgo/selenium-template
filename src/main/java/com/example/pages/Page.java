@@ -23,30 +23,31 @@ public class Page {
 	private WebElement startButton;
 
 	@FindBy(css = ".fWUGoP")
-	private WebElement carousel;
+	private WebElement images;
+
+	@FindBy(xpath = "/html/body/div/h1")
+	private WebElement textElement;
 
 	public Page(WebDriver theDriver) {
-		logger.debug("Instantiating BotanicPage");
+		logger.debug("Instantiating Page");
 		this.driver = theDriver;
 		wait = new WebDriverWait(driver, 15);
 	}
 
-	@Step("Open bot dialog")
-	public void openBotDialog() {
-		logger.info("Starting bot...");
-		wait.until(ExpectedConditions.elementToBeClickable(startButton));
-		startButton.click();
-	}
-
 	public void waitForText(String text) {
-		new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElement(startButton, text));
+		new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElement(textElement, text));
 
 	}
 
-	@Step("Get the first image of the carousel")
+	@Step("Get the first image")
 	public String getFirstImageOfCarousel() {
-		wait.until(ExpectedConditions.elementToBeClickable(carousel));
-		return carousel.getAttribute("src");
+		wait.until(ExpectedConditions.elementToBeClickable(images));
+		return images.getAttribute("src");
+	}
+
+	@Step("Get text")
+	public String getText() {
+		return wait.until(ExpectedConditions.elementToBeClickable(textElement)).getText();
 	}
 
 	public String getLink() {

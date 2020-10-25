@@ -22,18 +22,15 @@ import io.qameta.allure.Feature;
 public class SmokeTest {
 
 	@Test
-	@Description("Sent text is visible")
-	public void textSentIsShown() throws Exception {
+	@Description("example text is found")
+	public void exampleTextIsFound() throws Exception {
 		ChromeDriver driver = DriverManager.getDriver();
 		try {
 			MainPage mainPage = new MainPage(driver);
 			Page page = mainPage.goToPage();
-			page.openBotDialog();
-			String text = "Atostogos";
-			// page.sendText(text);
-			String textFound = "XXXX";
+			String textFound = page.getText();
 
-			assertThat("Text sent is not found!", textFound, containsString(text));
+			assertThat("Text sent is not found!", textFound, containsString("Example"));
 
 		} finally {
 			takeScreenshotForAllure("TextSentIsShown", driver);
